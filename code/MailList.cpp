@@ -11,9 +11,10 @@ MailList::~MailList() {
 std::vector<std::string> MailList::getMails(const std::string & emailAddressesString) const {
   std::vector<std::string> emailAddressesList;
 
-  if (!emailAddressesString.empty()) {
-    emailAddressesList.push_back(emailAddressesString);
+  if (emailAddressesString.empty()) {
+    return emailAddressesList;
   }
 
+  emailAddressesList.push_back(emailAddressesString);
   return emailAddressesList;
 }

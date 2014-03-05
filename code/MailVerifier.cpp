@@ -5,10 +5,6 @@ MailVerifier::MailVerifier() {}
 MailVerifier::~MailVerifier() {}
 
 bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
-
-  if (containsMoreThanOneAtSymbols(emailAddress))
-    return false;
-
   return ! isNotValid(emailAddress);
 }
 
@@ -16,7 +12,8 @@ bool MailVerifier::isNotValid(const std::string & emailAddress) const {
   return emailAddress.empty() ||
     doesNotContainAtSymbol(emailAddress) ||
     containsCommas(emailAddress) ||
-    containsSpaces(emailAddress);
+    containsSpaces(emailAddress) ||
+    containsMoreThanOneAtSymbols(emailAddress);
 }
 
 bool MailVerifier::doesNotContainAtSymbol(const std::string & emailAddress) const {

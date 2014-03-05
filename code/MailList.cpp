@@ -25,8 +25,21 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
   auto emailAddress = emailAddressesString.substr(0, commaPosition);
   emailAddressesList.push_back(emailAddress);
 
-  auto restOfEmailAddressesList = emailAddressesString.substr(commaPosition + 1);
-  emailAddressesList.push_back(restOfEmailAddressesList);
+  auto restOfEmailAddressesString = emailAddressesString.substr(commaPosition + 1);
+  //emailAddressesList.push_back(restOfEmailAddressesString);
+
+  commaPosition = restOfEmailAddressesString.find(",");
+
+  if (commaPosition == std::string::npos) {
+    emailAddressesList.push_back(restOfEmailAddressesString);
+    return emailAddressesList;
+  }
+
+  emailAddress = restOfEmailAddressesString.substr(0, commaPosition);
+  emailAddressesList.push_back(emailAddress);
+
+  restOfEmailAddressesString = restOfEmailAddressesString.substr(commaPosition + 1);
+  emailAddressesList.push_back(restOfEmailAddressesString);
   
   return emailAddressesList;
 }

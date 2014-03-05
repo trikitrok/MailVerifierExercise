@@ -5,19 +5,14 @@ MailVerifier::MailVerifier() {}
 MailVerifier::~MailVerifier() {}
 
 bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
-  if (emailAddress.empty())
-    return false;
+  return ! isNotValid(emailAddress);
+}
 
-  if (doesNotContainAtSymbol(emailAddress))
-    return false;
-
-  if (containsCommas(emailAddress))
-    return false;
-
-  if (containsSpaces(emailAddress))
-    return false;
-
-  return true;
+bool MailVerifier::isNotValid(const std::string & emailAddress) const {
+  return emailAddress.empty() ||
+    doesNotContainAtSymbol(emailAddress) ||
+    containsCommas(emailAddress) ||
+    containsSpaces(emailAddress);
 }
 
 bool MailVerifier::doesNotContainAtSymbol(const std::string & emailAddress) const {

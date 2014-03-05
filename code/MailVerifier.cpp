@@ -14,7 +14,7 @@ bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
   if (containsCommas(emailAddress))
     return false;
 
-  if (emailAddress.find(" ") != std::string::npos)
+  if (containsSpaces(emailAddress))
     return false;
 
   return true;
@@ -27,3 +27,8 @@ bool MailVerifier::doesNotContainAtSymbol(const std::string & emailAddress) cons
 bool MailVerifier::containsCommas(const std::string & emailAddress) const {
   return emailAddress.find(",") != std::string::npos;
 }
+
+bool MailVerifier::containsSpaces(const std::string & emailAddress) const {
+  return emailAddress.find(" ") != std::string::npos;
+}
+

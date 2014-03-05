@@ -11,6 +11,9 @@ bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
   if (doesNotContainAtSymbol(emailAddress))
     return false;
 
+  if (emailAddress.find(",") != std::string::npos)
+    return false;
+
   return true;
 }
 

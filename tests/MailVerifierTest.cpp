@@ -8,3 +8,8 @@ TEST(ForMailVerifier, AnEmptyEmailAddressIsNotValid) {
   MailVerifier mailverifier;
   ASSERT_FALSE(mailverifier.isValidEmailAddress(""));
 }
+
+TEST(ForMailVerifier, AnEmailAddressWithoutAtLeastOneAtIsNotValid) {
+  MailVerifier mailverifier;
+  ASSERT_FALSE(mailverifier.isValidEmailAddress("hola"));
+}

@@ -9,5 +9,8 @@ public:
   virtual ~MailVerifier();
 
   bool isValidEmailAddress(const std::string & emailAddress) const;
+
+private:
+  bool doesNotContainAtSymbol(const std::string & emailAdreess) const;
 };
 

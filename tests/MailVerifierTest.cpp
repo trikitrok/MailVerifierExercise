@@ -20,3 +20,7 @@ TEST_F(ForMailVerifier, AnEmailAddressWithoutAtLeastOneAtIsNotValid) {
 TEST_F(ForMailVerifier, AnEmailAddressContainingACommaIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress("@,"));
 }
+
+TEST_F(ForMailVerifier, AnEmailAddressContainingSpacesIsNotValid) {
+  ASSERT_FALSE(mailverifier.isValidEmailAddress("@ "));
+}

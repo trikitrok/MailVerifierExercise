@@ -14,6 +14,9 @@ bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
   if (containsCommas(emailAddress))
     return false;
 
+  if (emailAddress.find(" ") != std::string::npos)
+    return false;
+
   return true;
 }
 

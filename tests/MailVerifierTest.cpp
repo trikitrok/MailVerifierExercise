@@ -25,6 +25,10 @@ TEST_F(ForMailVerifier, AnEmailAddressContainingSpacesIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress("@ "));
 }
 
-TEST_F(ForMailVerifier, AnEmailAddressWitMoreThanOneAtIsNotValid) {
+TEST_F(ForMailVerifier, AnEmailAddressWithMoreThanOneAtSymbolIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress("@@"));
+}
+
+TEST_F(ForMailVerifier, AnEmailAddressWithoutAtLeastOneDotAfterTheAtSymbolIsNotValid) {
+  ASSERT_FALSE(mailverifier.isValidEmailAddress("@a"));
 }

@@ -5,7 +5,19 @@ MailVerifier::MailVerifier() {}
 MailVerifier::~MailVerifier() {}
 
 bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
-  return ! isNotValid(emailAddress);
+
+  bool isValid = ! isNotValid(emailAddress);
+
+  if (isValid) {
+    auto atPosition = emailAddress.find("@");
+
+    auto stringAfterAt = emailAddress.substr(atPosition + 1);
+
+    if (stringAfterAt.find(".") == std::string::npos)
+      return false;
+  }
+
+  return isValid;
 }
 
 bool MailVerifier::isNotValid(const std::string & emailAddress) const {

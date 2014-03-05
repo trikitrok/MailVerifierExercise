@@ -4,17 +4,19 @@
 
 using namespace ::testing;
 
-TEST(ForMailVerifier, AnEmptyEmailAddressIsNotValid) {
+class ForMailVerifier : public Test {
+public:
   MailVerifier mailverifier;
+};
+
+TEST_F(ForMailVerifier, AnEmptyEmailAddressIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress(""));
 }
 
-TEST(ForMailVerifier, AnEmailAddressWithoutAtLeastOneAtIsNotValid) {
-  MailVerifier mailverifier;
+TEST_F(ForMailVerifier, AnEmailAddressWithoutAtLeastOneAtIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress("hola"));
 }
 
-TEST(ForMailVerifier, AnEmailAddressContainingACommaIsNotValid) {
-  MailVerifier mailverifier;
+TEST_F(ForMailVerifier, AnEmailAddressContainingACommaIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress("@,"));
 }

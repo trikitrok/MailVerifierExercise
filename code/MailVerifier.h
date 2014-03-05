@@ -12,5 +12,6 @@ public:
 
 private:
   bool doesNotContainAtSymbol(const std::string & emailAdreess) const;
+  bool containsCommas(const std::string & emailAddress) const;
 };
 

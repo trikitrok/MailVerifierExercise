@@ -9,11 +9,7 @@ bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
   bool isValid = ! isNotValid(emailAddress);
 
   if (isValid) {
-    auto atPosition = emailAddress.find("@");
-
-    auto stringAfterAt = emailAddress.substr(atPosition + 1);
-
-    if (stringAfterAt.find(".") == std::string::npos)
+    if (doesNotContainsDotAfterAtSymbol(emailAddress))
       return false;
   }
 
@@ -42,5 +38,11 @@ bool MailVerifier::containsSpaces(const std::string & emailAddress) const {
 
 bool MailVerifier::containsMoreThanOneAtSymbols(const std::string & emailAddress) const {
   return emailAddress.find_first_of("@") != emailAddress.find_last_of("@");
+}
+
+bool MailVerifier::doesNotContainsDotAfterAtSymbol(const std::string & emailAddress) const {
+  auto atPosition = emailAddress.find("@");
+  auto stringAfterAt = emailAddress.substr(atPosition + 1);
+  return stringAfterAt.find(".") == std::string::npos;
 }
 

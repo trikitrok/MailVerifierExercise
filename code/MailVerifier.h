@@ -16,5 +16,6 @@ private:
   bool containsCommas(const std::string & emailAddress) const;
   bool containsSpaces(const std::string & emailAddress) const;
   bool containsMoreThanOneAtSymbols(const std::string & emailAddress) const;
+  bool doesNotContainsDotAfterAtSymbol(const std::string & emailAddress) const;
 };
 

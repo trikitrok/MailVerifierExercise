@@ -5,6 +5,10 @@ MailVerifier::MailVerifier() {}
 MailVerifier::~MailVerifier() {}
 
 bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
+
+  if (emailAddress.find_first_of("@") != emailAddress.find_last_of("@"))
+    return false;
+
   return ! isNotValid(emailAddress);
 }
 

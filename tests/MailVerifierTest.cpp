@@ -24,3 +24,7 @@ TEST_F(ForMailVerifier, AnEmailAddressContainingACommaIsNotValid) {
 TEST_F(ForMailVerifier, AnEmailAddressContainingSpacesIsNotValid) {
   ASSERT_FALSE(mailverifier.isValidEmailAddress("@ "));
 }
+
+TEST_F(ForMailVerifier, AnEmailAddressWitMoreThanOneAtIsNotValid) {
+  ASSERT_FALSE(mailverifier.isValidEmailAddress("@@"));
+}

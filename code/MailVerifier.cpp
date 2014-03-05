@@ -6,7 +6,7 @@ MailVerifier::~MailVerifier() {}
 
 bool MailVerifier::isValidEmailAddress(const std::string & emailAddress) const {
 
-  if (emailAddress.find_first_of("@") != emailAddress.find_last_of("@"))
+  if (containsMoreThanOneAtSymbols(emailAddress))
     return false;
 
   return ! isNotValid(emailAddress);
@@ -29,5 +29,9 @@ bool MailVerifier::containsCommas(const std::string & emailAddress) const {
 
 bool MailVerifier::containsSpaces(const std::string & emailAddress) const {
   return emailAddress.find(" ") != std::string::npos;
+}
+
+bool MailVerifier::containsMoreThanOneAtSymbols(const std::string & emailAddress) const {
+  return emailAddress.find_first_of("@") != emailAddress.find_last_of("@");
 }
 

@@ -28,9 +28,7 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
 
 std::vector<std::string> MailList::extractEmailAddresses(const std::string & emailAddressesString) const {
   
-  std::vector<std::string> emailAddresses;
-  StringUtils::split(emailAddresses, emailAddressesString, ",");
-
+  auto emailAddresses = StringUtils::split(emailAddressesString, ",");
   return trimEmailAddresses(emailAddresses);
 }
 

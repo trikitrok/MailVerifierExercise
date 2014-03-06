@@ -5,6 +5,16 @@
 #include <cctype>
 #include <locale>
 
+std::vector<std::string> StringUtils::split(const std::string & str,
+  const std::string & delimiter) {
+
+  std::vector<std::string> tokens;
+
+  split(tokens, str, delimiter);
+
+  return tokens;
+}
+
 void StringUtils::split(std::vector<std::string>& tokens, const std::string & str, 
   const std::string & delimiter) {
 

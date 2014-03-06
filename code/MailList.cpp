@@ -17,9 +17,7 @@ MailList::~MailList() {
 
 std::vector<std::string> MailList::getMails(const std::string & emailAddressesString) const {
   
-  std::vector<std::string> emailAddresses;
-
-  split(emailAddresses, emailAddressesString);
+  auto emailAddresses = extractEmailAddresses(emailAddressesString);
 
   emailAddresses = filterValid(emailAddresses);
 
@@ -28,10 +26,12 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
   return emailAddresses;
 }
 
-void MailList::split(std::vector<std::string>& emailAddresses, 
-  const std::string & emailAddressesString) const {
+std::vector<std::string> MailList::extractEmailAddresses(const std::string & emailAddressesString) const {
+  std::vector<std::string> emailAddresses;
 
   StringUtils::split(emailAddresses, emailAddressesString, ",");
+
+  return emailAddresses;
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddresses) const {

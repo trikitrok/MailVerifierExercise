@@ -50,14 +50,8 @@ void MailList::split(std::vector<std::string>& emailAddressesList,
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddressesList) const {
- 
-  std::vector<std::string> validEmailAddresses;
-
-  std::copy_if(emailAddressesList.begin(), emailAddressesList.end(),
-    std::back_inserter(validEmailAddresses),
+  return VectorUtils::filter(emailAddressesList,
     std::bind1st(std::mem_fun(&MailList::isValid), this));
-
-  return validEmailAddresses;
 }
 
 bool MailList::isValid(const std::string emailAddress) const {

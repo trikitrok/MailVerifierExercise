@@ -7,12 +7,13 @@
 
 namespace VectorUtils
 {
-  template<typename T, typename Function>
-  std::vector<T> filter(const std::vector<T> & original, Function pred) {
+  template<typename T, class UnaryPredicate>
+  std::vector<T> filter(const std::vector<T> & original, UnaryPredicate pred) {
 
     std::vector<T> filtered;
 
-    std::copy_if(original.begin(), original.end(),
+    std::copy_if(
+      original.begin(), original.end(),
       std::back_inserter(filtered),
       pred);
 

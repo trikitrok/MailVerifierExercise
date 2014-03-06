@@ -20,5 +20,6 @@ private:
   std::vector<std::string> filterValid(const std::vector<std::string> & emailAddressesList) const;
   bool isValid(const std::string emailAddress) const;
   std::vector<std::string> removeDuplicate(const std::vector<std::string> & emailAddresses) const;
+  std::vector<std::string> trimEmailAddresses(const std::vector<std::string> & emailAddresses) const;
 };
 

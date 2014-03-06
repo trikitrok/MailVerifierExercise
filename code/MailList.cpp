@@ -31,10 +31,11 @@ std::vector<std::string> MailList::extractEmailAddresses(const std::string & ema
   std::vector<std::string> emailAddresses;
   StringUtils::split(emailAddresses, emailAddressesString, ",");
 
-  auto trimmedAddresses = VectorUtils::map<std::string, std::string>(emailAddresses, 
-    StringUtils::trim);
+  return trimEmailAddresses(emailAddresses);
+}
 
-  return trimmedAddresses;
+std::vector<std::string> MailList::trimEmailAddresses(const std::vector<std::string> & emailAddresses) const {
+  return VectorUtils::map<std::string, std::string>(emailAddresses, StringUtils::trim);
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddresses) const {

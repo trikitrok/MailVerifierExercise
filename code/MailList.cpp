@@ -2,6 +2,8 @@
 
 #include "MailVerifier.h"
 
+#include <set>
+
 MailList::MailList(MailVerifier * mailVerifier) {
   this->mailVerifier = mailVerifier;
 }
@@ -11,11 +13,24 @@ MailList::~MailList() {
 }
 
 std::vector<std::string> MailList::getMails(const std::string & emailAddressesString) const {
+  
   std::vector<std::string> emailAddresses;
 
   split(emailAddresses, emailAddressesString);
 
-  return filterValid(emailAddresses);
+  emailAddresses = filterValid(emailAddresses);
+
+  std::vector<std::string> nonDuplicateEmailAddresses;
+  std::set<std::string> setOfEmailAddresses;
+
+  for (auto i = 0; i < emailAddresses.size(); ++i) {
+    auto res = setOfEmailAddresses.insert(emailAddresses[i]);
+    if (res.second) {
+      nonDuplicateEmailAddresses.push_back(emailAddresses[i]);
+    }
+  }
+
+  return nonDuplicateEmailAddresses;
 }
 
 void MailList::split(std::vector<std::string>& emailAddressesList, 

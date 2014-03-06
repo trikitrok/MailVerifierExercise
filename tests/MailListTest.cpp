@@ -26,3 +26,9 @@ TEST(AMailList, IgnoresInvalidEmailAddresses) {
   ASSERT_THAT(mailList.getMails("h@h.com,x@com,a@a.com"),
     ElementsAre("h@h.com", "a@a.com"));
 }
+
+TEST(AMailList, RemovesDuplicateValidEmailAddressesSeparatedByCommas) {
+  MailList mailList(new MailVerifier);
+  ASSERT_THAT(mailList.getMails("h@h.com,x@x.com,a@a.com,h@h.com"),
+    ElementsAre("h@h.com", "x@x.com", "a@a.com"));
+}

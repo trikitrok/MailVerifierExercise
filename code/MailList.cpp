@@ -15,7 +15,15 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
 
   splitMails(emailAddressesList, emailAddressesString);
 
-  return emailAddressesList;
+  std::vector<std::string> validEmailAddresses;
+
+  for (auto i = 0; i < emailAddressesList.size(); ++i) {
+    if (mailVerifier->isValidEmailAddress(emailAddressesList[i])) {
+      validEmailAddresses.push_back(emailAddressesList[i]);
+    }
+  }
+
+  return validEmailAddresses;
 }
 
 void MailList::splitMails(std::vector<std::string>& emailAddressesList, 
@@ -28,14 +36,12 @@ void MailList::splitMails(std::vector<std::string>& emailAddressesList,
   auto commaPosition = emailAddressesString.find(",");
 
   if (commaPosition == std::string::npos) {
-    if (mailVerifier->isValidEmailAddress(emailAddressesString))
-      emailAddressesList.push_back(emailAddressesString);
+    emailAddressesList.push_back(emailAddressesString);
     return;
   }
 
   auto emailAddress = emailAddressesString.substr(0, commaPosition);
-  if (mailVerifier->isValidEmailAddress(emailAddress))
-    emailAddressesList.push_back(emailAddress);
+  emailAddressesList.push_back(emailAddress);
 
   auto restOfEmailAddressesString = emailAddressesString.substr(commaPosition + 1);
 

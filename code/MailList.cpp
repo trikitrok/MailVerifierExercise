@@ -22,7 +22,7 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
 
   emailAddresses = filterValid(emailAddresses);
 
-  emailAddresses = VectorUtils::removeDuplicate<std::string>(emailAddresses);
+  emailAddresses = removeDuplicate(emailAddresses);
 
   return emailAddresses;
 }
@@ -56,4 +56,8 @@ std::vector<std::string> MailList::filterValid(const std::vector<std::string> & 
 
 bool MailList::isValid(const std::string emailAddress) const {
   return mailVerifier->isValidEmailAddress(emailAddress);
+}
+
+std::vector<std::string> MailList::removeDuplicate(const std::vector<std::string> & emailAddresses) const {
+  return VectorUtils::removeDuplicate<std::string>(emailAddresses);
 }

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <set>
 
 namespace VectorUtils
 {
@@ -39,9 +40,10 @@ namespace VectorUtils
   std::vector<T> removeDuplicate(const std::vector<T> & elements) {
     std::vector<T> nonDuplicateElements;
     std::set<T> setOfElements;
+    std::pair<std::set<T>::iterator, bool> res;
 
     for (auto i = 0; i < elements.size(); ++i) {
-      auto res = setOfElements.insert(elements[i]);
+      res = setOfElements.insert(elements[i]);
       if (res.second) {
         nonDuplicateElements.push_back(elements[i]);
       }

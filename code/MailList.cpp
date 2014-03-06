@@ -4,7 +4,7 @@
 
 #include "VectorUtils.h"
 
-#include <set>
+#include <functional>
 
 MailList::MailList(MailVerifier * mailVerifier) {
   this->mailVerifier = mailVerifier;
@@ -50,13 +50,12 @@ void MailList::split(std::vector<std::string>& emailAddressesList,
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddressesList) const {
+ 
   std::vector<std::string> validEmailAddresses;
 
-  for (auto i = 0; i < emailAddressesList.size(); ++i) {
-    if (isValid(emailAddressesList[i])) {
-      validEmailAddresses.push_back(emailAddressesList[i]);
-    }
-  }
+  std::copy_if(emailAddressesList.begin(), emailAddressesList.end(),
+    std::back_inserter(validEmailAddresses),
+    std::bind1st(std::mem_fun(&MailList::isValid), this));
 
   return validEmailAddresses;
 }

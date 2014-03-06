@@ -1,5 +1,7 @@
 #include "MailList.h"
 
+#include "MailVerifier.h"
+
 MailList::MailList(MailVerifier * mailVerifier) {
   this->mailVerifier = mailVerifier;
 }
@@ -26,12 +28,14 @@ void MailList::splitMails(std::vector<std::string>& emailAddressesList,
   auto commaPosition = emailAddressesString.find(",");
 
   if (commaPosition == std::string::npos) {
-    emailAddressesList.push_back(emailAddressesString);
+    if (mailVerifier->isValidEmailAddress(emailAddressesString))
+      emailAddressesList.push_back(emailAddressesString);
     return;
   }
 
   auto emailAddress = emailAddressesString.substr(0, commaPosition);
-  emailAddressesList.push_back(emailAddress);
+  if (mailVerifier->isValidEmailAddress(emailAddress))
+    emailAddressesList.push_back(emailAddress);
 
   auto restOfEmailAddressesString = emailAddressesString.substr(commaPosition + 1);
 

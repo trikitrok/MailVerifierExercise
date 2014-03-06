@@ -3,7 +3,6 @@
 #include <algorithm> 
 #include <functional> 
 #include <cctype>
-#include <locale>
 
 std::vector<std::string> StringUtils::split(const std::string & str,
   const std::string & delimiter) {

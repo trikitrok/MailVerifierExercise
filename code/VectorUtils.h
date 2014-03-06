@@ -34,4 +34,18 @@ namespace VectorUtils
   void append(std::vector<T> & appendedTo, const std::vector<T> & appended) {
     appendedTo.insert(appendedTo.end(), appended.begin(), appended.end());
   }
+
+  template<typename T>
+  std::vector<T> removeDuplicate(const std::vector<T> & elements) {
+    std::vector<T> nonDuplicateElements;
+    std::set<T> setOfElements;
+
+    for (auto i = 0; i < elements.size(); ++i) {
+      auto res = setOfElements.insert(elements[i]);
+      if (res.second) {
+        nonDuplicateElements.push_back(elements[i]);
+      }
+    }
+    return nonDuplicateElements;
+  }
 }

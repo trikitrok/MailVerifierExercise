@@ -1,5 +1,10 @@
 #include "StringUtils.h"
 
+#include <algorithm> 
+#include <functional> 
+#include <cctype>
+#include <locale>
+
 void StringUtils::split(std::vector<std::string>& tokens, const std::string & str, 
   const std::string & delimiter) {
 
@@ -17,4 +22,20 @@ void StringUtils::split(std::vector<std::string>& tokens, const std::string & st
   tokens.push_back(str.substr(0, delimiterPosition));
 
   split(tokens, str.substr(delimiterPosition + 1), delimiter);
+}
+
+std::string StringUtils::ltrim(const std::string & str) {
+  auto s = std::string(str);
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+  return s;
+}
+
+std::string StringUtils::rtrim(const std::string & str) {
+  auto s = std::string(str);
+  s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+  return s;
+}
+
+std::string StringUtils::trim(const std::string & str) {
+  return ltrim(rtrim(std::string(str)));
 }

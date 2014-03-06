@@ -3,6 +3,7 @@
 #include "MailVerifier.h"
 
 #include "VectorUtils.h"
+#include "StringUtils.h"
 
 #include <functional>
 
@@ -30,23 +31,7 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
 void MailList::split(std::vector<std::string>& emailAddresses, 
   const std::string & emailAddressesString) const {
 
-  if (emailAddressesString.empty()) {
-    return;
-  }
-
-  auto commaPosition = emailAddressesString.find(",");
-
-  if (commaPosition == std::string::npos) {
-    emailAddresses.push_back(emailAddressesString);
-    return;
-  }
-
-  auto emailAddress = emailAddressesString.substr(0, commaPosition);
-  emailAddresses.push_back(emailAddress);
-
-  auto restOfEmailAddressesString = emailAddressesString.substr(commaPosition + 1);
-
-  split(emailAddresses, restOfEmailAddressesString);
+  StringUtils::split(emailAddresses, emailAddressesString, ",");
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddresses) const {

@@ -25,7 +25,8 @@ namespace VectorUtils
 
     std::vector<T2> mapped;
 
-    std::transform(original.begin(), original.end(),
+    std::transform(
+      original.begin(), original.end(),
       std::back_inserter(mapped),
       f);
 

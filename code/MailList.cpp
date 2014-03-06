@@ -27,17 +27,14 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
 }
 
 std::vector<std::string> MailList::extractEmailAddresses(const std::string & emailAddressesString) const {
+  
   std::vector<std::string> emailAddresses;
-
   StringUtils::split(emailAddresses, emailAddressesString, ",");
 
-  std::vector<std::string> trimmedEmailAddresses;
+  auto trimmedAddresses = VectorUtils::map<std::string, std::string>(emailAddresses, 
+    StringUtils::trim);
 
-  for (auto i = 0; i < emailAddresses.size(); ++i) {
-    trimmedEmailAddresses.push_back(StringUtils::trim(emailAddresses[i]));
-  }
-
-  return trimmedEmailAddresses;
+  return trimmedAddresses;
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddresses) const {

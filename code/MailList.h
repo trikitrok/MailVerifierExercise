@@ -18,5 +18,6 @@ private:
 
   void split(std::vector<std::string>& emailAddressesList, const std::string & emailAddressesString) const;
   std::vector<std::string> filterValid(const std::vector<std::string> & emailAddressesList) const;
+  bool isValid(const std::string emailAddress) const;
 };
 

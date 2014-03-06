@@ -53,10 +53,14 @@ std::vector<std::string> MailList::filterValid(const std::vector<std::string> & 
   std::vector<std::string> validEmailAddresses;
 
   for (auto i = 0; i < emailAddressesList.size(); ++i) {
-    if (mailVerifier->isValidEmailAddress(emailAddressesList[i])) {
+    if (isValid(emailAddressesList[i])) {
       validEmailAddresses.push_back(emailAddressesList[i]);
     }
   }
 
   return validEmailAddresses;
+}
+
+bool MailList::isValid(const std::string emailAddress) const {
+  return mailVerifier->isValidEmailAddress(emailAddress);
 }

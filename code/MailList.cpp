@@ -27,7 +27,7 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
   return emailAddresses;
 }
 
-void MailList::split(std::vector<std::string>& emailAddressesList, 
+void MailList::split(std::vector<std::string>& emailAddresses, 
   const std::string & emailAddressesString) const {
 
   if (emailAddressesString.empty()) {
@@ -37,20 +37,20 @@ void MailList::split(std::vector<std::string>& emailAddressesList,
   auto commaPosition = emailAddressesString.find(",");
 
   if (commaPosition == std::string::npos) {
-    emailAddressesList.push_back(emailAddressesString);
+    emailAddresses.push_back(emailAddressesString);
     return;
   }
 
   auto emailAddress = emailAddressesString.substr(0, commaPosition);
-  emailAddressesList.push_back(emailAddress);
+  emailAddresses.push_back(emailAddress);
 
   auto restOfEmailAddressesString = emailAddressesString.substr(commaPosition + 1);
 
-  split(emailAddressesList, restOfEmailAddressesString);
+  split(emailAddresses, restOfEmailAddressesString);
 }
 
-std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddressesList) const {
-  return VectorUtils::filter(emailAddressesList,
+std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddresses) const {
+  return VectorUtils::filter(emailAddresses,
     std::bind1st(std::mem_fun(&MailList::isValid), this));
 }
 

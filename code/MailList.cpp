@@ -20,17 +20,9 @@ std::vector<std::string> MailList::getMails(const std::string & emailAddressesSt
 
   emailAddresses = filterValid(emailAddresses);
 
-  std::vector<std::string> nonDuplicateEmailAddresses;
-  std::set<std::string> setOfEmailAddresses;
+  emailAddresses = removeDuplicate(emailAddresses);
 
-  for (auto i = 0; i < emailAddresses.size(); ++i) {
-    auto res = setOfEmailAddresses.insert(emailAddresses[i]);
-    if (res.second) {
-      nonDuplicateEmailAddresses.push_back(emailAddresses[i]);
-    }
-  }
-
-  return nonDuplicateEmailAddresses;
+  return emailAddresses;
 }
 
 void MailList::split(std::vector<std::string>& emailAddressesList, 
@@ -65,4 +57,17 @@ std::vector<std::string> MailList::filterValid(const std::vector<std::string> & 
   }
 
   return validEmailAddresses;
+}
+
+std::vector<std::string> MailList::removeDuplicate(const std::vector<std::string> & emailAddresses) const {
+  std::vector<std::string> nonDuplicateEmailAddresses;
+  std::set<std::string> setOfEmailAddresses;
+
+  for (auto i = 0; i < emailAddresses.size(); ++i) {
+    auto res = setOfEmailAddresses.insert(emailAddresses[i]);
+    if (res.second) {
+      nonDuplicateEmailAddresses.push_back(emailAddresses[i]);
+    }
+  }
+  return nonDuplicateEmailAddresses;
 }

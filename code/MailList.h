@@ -16,6 +16,7 @@ public:
 private:
   MailVerifier * mailVerifier;
 
-  void splitMails(std::vector<std::string>& emailAddressesList, const std::string & emailAddressesString) const;
+  void split(std::vector<std::string>& emailAddressesList, const std::string & emailAddressesString) const;
+  std::vector<std::string> filterValid(const std::vector<std::string> & emailAddressesList) const;
 };
 

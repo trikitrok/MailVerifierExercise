@@ -11,22 +11,14 @@ MailList::~MailList() {
 }
 
 std::vector<std::string> MailList::getMails(const std::string & emailAddressesString) const {
-  std::vector<std::string> emailAddressesList;
+  std::vector<std::string> emailAddresses;
 
-  splitMails(emailAddressesList, emailAddressesString);
+  split(emailAddresses, emailAddressesString);
 
-  std::vector<std::string> validEmailAddresses;
-
-  for (auto i = 0; i < emailAddressesList.size(); ++i) {
-    if (mailVerifier->isValidEmailAddress(emailAddressesList[i])) {
-      validEmailAddresses.push_back(emailAddressesList[i]);
-    }
-  }
-
-  return validEmailAddresses;
+  return filterValid(emailAddresses);
 }
 
-void MailList::splitMails(std::vector<std::string>& emailAddressesList, 
+void MailList::split(std::vector<std::string>& emailAddressesList, 
   const std::string & emailAddressesString) const {
 
   if (emailAddressesString.empty()) {
@@ -45,5 +37,17 @@ void MailList::splitMails(std::vector<std::string>& emailAddressesList,
 
   auto restOfEmailAddressesString = emailAddressesString.substr(commaPosition + 1);
 
-  splitMails(emailAddressesList, restOfEmailAddressesString);
+  split(emailAddressesList, restOfEmailAddressesString);
+}
+
+std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddressesList) const {
+  std::vector<std::string> validEmailAddresses;
+
+  for (auto i = 0; i < emailAddressesList.size(); ++i) {
+    if (mailVerifier->isValidEmailAddress(emailAddressesList[i])) {
+      validEmailAddresses.push_back(emailAddressesList[i]);
+    }
+  }
+
+  return validEmailAddresses;
 }

@@ -34,7 +34,7 @@ std::vector<std::string> MailList::trimEmailAddresses(const std::vector<std::str
 }
 
 std::vector<std::string> MailList::filterValid(const std::vector<std::string> & emailAddresses) const {
-  return VectorUtils::filter(emailAddresses, [&](const std::string emailAddress) {
+  return VectorUtils::filter(emailAddresses, [this](const std::string emailAddress) {
     return mailVerifier->isValidEmailAddress(emailAddress);
   });
 }

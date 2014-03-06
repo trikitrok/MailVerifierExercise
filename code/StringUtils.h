@@ -3,11 +3,12 @@
 #include <string>
 #include <vector>
 
-namespace StringUtils {
+namespace StringUtils
+{
 
   std::vector<std::string> split(const std::string & str, const std::string & delimiter);
 
-  void split(std::vector<std::string>& tokens, const std::string & str, 
+  void split(std::vector<std::string>& tokens, const std::string & str,
     const std::string & delimiter);
 
   std::string rtrim(const std::string &str);
